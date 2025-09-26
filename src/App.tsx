@@ -29,10 +29,15 @@ import {
   Eye,
   EyeOff,
   Copy,
-  Check
+  Check,
+  ShoppingBag,
+  Terminal
 } from 'lucide-react';
+import Marketplace from './components/Marketplace';
+import DropletManagement from './components/DropletManagement';
+import Security from './components/Security';
 
-type Tab = 'dashboard' | 'instances' | 'networking' | 'storage' | 'api' | 'admin' | 'billing' | 'support';
+type Tab = 'dashboard' | 'instances' | 'droplets' | 'networking' | 'storage' | 'marketplace' | 'api' | 'security' | 'admin' | 'billing' | 'support';
 
 interface Instance {
   id: string;
@@ -816,6 +821,15 @@ function App() {
                 <span>Instances</span>
               </button>
               <button
+                onClick={() => setActiveTab('droplets')}
+                className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
+                  activeTab === 'droplets' ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                <Terminal className="h-5 w-5" />
+                <span>Droplets</span>
+              </button>
+              <button
                 onClick={() => setActiveTab('networking')}
                 className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
                   activeTab === 'networking' ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-50'
@@ -834,6 +848,15 @@ function App() {
                 <span>Storage</span>
               </button>
               <button
+                onClick={() => setActiveTab('marketplace')}
+                className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
+                  activeTab === 'marketplace' ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                <ShoppingBag className="h-5 w-5" />
+                <span>Marketplace</span>
+              </button>
+              <button
                 onClick={() => setActiveTab('api')}
                 className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
                   activeTab === 'api' ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-50'
@@ -841,6 +864,15 @@ function App() {
               >
                 <Key className="h-5 w-5" />
                 <span>API</span>
+              </button>
+              <button
+                onClick={() => setActiveTab('security')}
+                className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
+                  activeTab === 'security' ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                <Shield className="h-5 w-5" />
+                <span>Security</span>
               </button>
               <button
                 onClick={() => setActiveTab('admin')}
@@ -877,9 +909,12 @@ function App() {
         <main className="flex-1">
           {activeTab === 'dashboard' && renderDashboard()}
           {activeTab === 'instances' && renderInstances()}
+          {activeTab === 'droplets' && <DropletManagement />}
           {activeTab === 'networking' && renderNetworking()}
           {activeTab === 'storage' && renderStorage()}
+          {activeTab === 'marketplace' && <Marketplace />}
           {activeTab === 'api' && renderApi()}
+          {activeTab === 'security' && <Security />}
           {activeTab === 'admin' && renderAdmin()}
           {activeTab === 'billing' && (
             <div className="p-6">
